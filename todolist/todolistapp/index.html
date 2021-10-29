@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>TODO LIST APP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+<nav class="navbar navbar-light">
+    <a href="#" class="navbar-brand">TODO LIST APP</a>
+    <a href="{% url 'admin:index' %}" class = 'navbar-link btn-lg' >Admin</a>
+    <a href="{% url 'upload-task' %}" class="navbar-link btn-lg">add tasks</a>
+</nav>
+<br>
+{% block content %}
+<div class="card-columns">
+    {% for task in shelf %}
+    <div class="card">
+  <img class="card-img-top" src="">
+  <div class="card-body">
+    <h5 class="card-title">{{ task.taskTitle }}</h5>
+    <p class="card-text">{{ task.taskDescription }}</p>
+      <p class="card-text"> time created {{ task.time }}</p>
+
+<!--      {% if bookmark %}-->
+       <p class="card-text">bookmarked</p>
+<!--      {% endif %}-->
+   <div class="card-footer bg-transparent border-dark">
+
+   <center>
+       <a href="update/{{task.id}}" class="btn btn-warning" >edit</a>
+       <a href="delete/{{task.id}}" class="btn btn-danger" >delete</a>
+
+           {% if task.bookmark %}
+       <button class="btn btn-success">
+           bookmarked
+       </button>
+           {% endif %}
+    </center>
+    </div>
+  </div>
+</div>
+    {% endfor %}
+</div>
+{% endblock %}
+</body>
+</html>
